@@ -18,5 +18,10 @@ describe('WDIO', function() {
         paragraphs.forEach(function(p){
             console.log(p.getText());
         })
+
+        /*let ducks = $$('#box-... .products').$$('div.col...')
+        ducks.filter(duck => {
+            return duck.$('a').getAttribute('titile') == 'Yellow Duck'
+        })*/
     })
 })
