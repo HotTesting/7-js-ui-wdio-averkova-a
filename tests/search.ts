@@ -30,7 +30,7 @@ describe("Items search", function() {
     searchWord("Yellow");
     expect(browser.getUrl()).to.contain("yellow");
     expect(elem.yellowDuckPage.isDisplayed());
-    const title = elem.YelloDuckTitle.getText();
+    const title = this.elem.YelloDuckTitle.getText();
     expect(title).to.contain("Yellow");
   });
 
@@ -38,9 +38,5 @@ describe("Items search", function() {
     searchWord("Selenium");
     const text = elem.noResultsPage.getText();
     expect(text).to.contain("No matching results");
-  });
-
-  afterEach("Clean search input", function() {
-    elem.searchInput.clearValue();
   });
 });
