@@ -5,12 +5,12 @@ describe("Registration", function() {
   it("test", function() {
     browser.url("http://ip-5236.sunline.net.ua:38015");
 
-    $('[name="query"]').setValue("duck"); // 
-    $('[name="query"]').addValue("Enter");
+    $('[name="query"]').setValue("duck"); 
+    $('[name="query"]').addValue("Enter"); // enter button
     browser.pause(10000);
   });
 
-  it.skip("should be successful", function() {
+  it("should be successful", function() {
     browser.url("/create_account");
     $('input[name="firstname"]').setValue("TestFirstName");
     $('input[name="lastname"]').setValue("TestLastName");

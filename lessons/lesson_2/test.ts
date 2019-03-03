@@ -4,9 +4,11 @@
         browser.url('/')
         console.log('--Test passed!')
     })
+    skip - выключить тест
+    only - запустить только один тест
 })*/
 
-describe('WDIO', function() {
+describe.skip('WDIO', function() {
     it('Searching elements', function() {
         browser.url('/about-us-i-1');
         let body = $('body');
