@@ -2,17 +2,16 @@ import { expect } from "chai";
 
 describe("Items search", function() {
   //  test elements
-  const elem = {
-    searchInput: $('form[name="search_form"] input[data-type="search"]'),
-    allDuckItems: $$('.products.row.half-gutter div.col-xs-6 div.product.column'),
-    yellowDuckPage: $('div.box[data-name*="Yellow"]'),
-    YelloDuckTitle: $('div.box[data-name*="Yellow"] h1.title'),
-    noResultsPage: $("div #box-search-results div em")
-  };
+    const searchInput = 'form[name="search_form"] input[data-type="search"]'
+    const allDuckItems = '.products.row.half-gutter div.col-xs-6 div.product.column'
+    const yellowDuckPage = 'div.box[data-name*="Yellow"]'
+    const YelloDuckTitle = 'div.box[data-name*="Yellow"] h1.title'
+    const noResultsPage = "div #box-search-results div em"
+  
 
   function searchWord(word) {
-    elem.searchInput.setValue(word);
-    elem.searchInput.addValue("Enter");
+    $(searchInput).setValue(word);
+    $(searchInput).addValue("Enter");
     browser.pause(5000);
   }
 
@@ -23,20 +22,20 @@ describe("Items search", function() {
   it("should show results in case multiple items matches", function() {
     searchWord("duck");
     expect(browser.getUrl()).to.contain("query=duck");
-    expect(elem.allDuckItems.every(duck => duck.isDisplayed())).to.equal(true);
+    expect($$(allDuckItems).every(duck => duck.isDisplayed())).to.equal(true);
   });
 
   it("should redirect to item page in case only one result matches", function() {
     searchWord("Yellow");
     expect(browser.getUrl()).to.contain("yellow");
-    expect(elem.yellowDuckPage.isDisplayed());
-    const title = this.elem.YelloDuckTitle.getText();
+    expect($(yellowDuckPage).isDisplayed());
+    const title = $(YelloDuckTitle).getText();
     expect(title).to.contain("Yellow");
   });
 
   it("should redirect to 'no matching results' in case no items matched", function() {
     searchWord("Selenium");
-    const text = elem.noResultsPage.getText();
+    const text = $(noResultsPage).getText();
     expect(text).to.contain("No matching results");
   });
 });
