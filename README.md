@@ -5,6 +5,8 @@ find your repo in list and turn on builds for it
 
 See your build results here - https://travis-ci.org/StartITProtractorJS
 
+[![Build Status](https://travis-ci.org/StartITProtractorJS/7-js-ui-wdio-Bezya.svg?branch=master)](https://travis-ci.org/StartITProtractorJS/7-js-ui-wdio-Bezya)
+
 # startit js ui automation course
 Demo project for startit students
 
