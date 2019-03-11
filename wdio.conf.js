@@ -22,4 +22,9 @@ exports.config = {
     process.env.TS_NODE_FILES = true;
     require("ts-node").register();
   }
+  //beforeTest: function(test) {
+  //  browser.setTimeout({
+  //  implicit: 250
+  //});
+  //}
 };

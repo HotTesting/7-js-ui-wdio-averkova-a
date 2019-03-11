@@ -24,7 +24,9 @@ describe("Items search", function() {
   it("should show results in case multiple items matches", function() {
     searchWord("duck");
     expect(browser.getUrl()).to.contain("query=duck");
-    expect($$(allDuckItems).every(duck => duck.isDisplayed())).to.equal(true);
+    let ducks = $$(allDuckItems)
+    //expect(ducks.length.not.to.equal.(0));
+    expect(ducks.every(duck => duck.isDisplayed())).to.equal(true);
   });
 
   it("should redirect to item page in case only one result matches", function() {
@@ -48,7 +50,7 @@ describe("Items search", function() {
     $(sortByPriceButton).click();
     browser.pause(3000);
 
-    const duckPriceArr = $$(allDuckItems).map(duck =>parseInt(duck.getAttribute("data-price")));
+    const duckPriceArr = $$(allDuckItems).map(duck => parseInt(duck.getAttribute("data-price")));
     const duckPriceNewArr = duckPriceArr.slice(0); // copy array
     duckPriceNewArr.sort((a, b) => a - b); // price sorting
 
