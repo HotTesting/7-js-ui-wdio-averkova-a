@@ -24,8 +24,9 @@ describe("Items search", function() {
   it("should show results in case multiple items matches", function() {
     searchWord("duck");
     expect(browser.getUrl()).to.contain("query=duck");
-    let ducks = $$(allDuckItems)
-    //expect(ducks.length.not.to.equal.(0));
+    let ducks = $$(allDuckItems);
+    let duckLength = $$(allDuckItems).length;
+    expect(duckLength).to.not.equal(0);
     expect(ducks.every(duck => duck.isDisplayed())).to.equal(true);
   });
 
