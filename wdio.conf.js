@@ -2,12 +2,12 @@ exports.config = {
   hostname: "localhost",
   port: 4444,
   path: "/wd/hub",
-  specs: ["./tests/*.ts"],
+  specs: ["./tests/homework_5_6/homework_5_6.ts"],
   sync: true,
   services: ["selenium-standalone"],
   capabilities: [
     {
-      browserName: "chrome",
+      browserName: "chrome", 
       maxInstances: 1
     }
   ],
@@ -16,15 +16,16 @@ exports.config = {
   mochaOpts: {
     ui: "bdd",
     timeout: 120000
+    //retries: 2,
+    //fgrep: "C1232"
   },
   reporters: ['spec'],
   before: function(capabilities, specs) {
     process.env.TS_NODE_FILES = true;
     require("ts-node").register();
+
+    browser.setTimeout({
+      implicit: 250
+    })
   }
-  //beforeTest: function(test) {
-  //  browser.setTimeout({
-  //  implicit: 250
-  //});
-  //}
 };

@@ -1,6 +1,6 @@
 import { expect } from "chai";
 import * as faker from "faker";
-import { ProductDetails, Checkout, Confirmation } from "../../pageObjects";
+import { ProductDetails, Checkout, Confirmation } from "../lesson_6/pageObjects";
 
 // PageObject example
 describe("Guest", function() {
