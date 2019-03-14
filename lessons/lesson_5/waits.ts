@@ -20,9 +20,15 @@ describe("Waits", function() {
     // $('div').waitForEnabled()
     // $('div').waitForExist()
 
+    /* browser.waitUntil(
+      function() {
+        return !$('div').isDisplayed();
+      }, 10000, "Error msg", 10)
+    );*/
+
     browser.waitUntil(
       function() {
-        return !$(".loader").isDisplayed() && $("div").isDisplayed();
+        return !$(".loader").isDisplayed() && $("div").isDisplayed();// loader пропал, а элемент появился
       },
       undefined,
       undefined,
