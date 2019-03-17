@@ -22,3 +22,4 @@ async function myFunc () {
     console.log(typeof a)
     console.log(a)
 }
+
