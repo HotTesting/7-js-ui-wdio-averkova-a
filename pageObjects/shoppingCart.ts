@@ -9,7 +9,9 @@ export class ShoppingCartPO extends BasePO {
     super.open(url);
   }
 
-  checkCart(): any {
+ 
+//Open Checkout page and Check cart block on the page
+  openCart(): any {
     const openCartButton = $("#cart");
     const pageTitle = $("h2.title");
     const checkoutCart = $("#box-checkout-cart");
@@ -18,13 +20,13 @@ export class ShoppingCartPO extends BasePO {
       function() {
         return (
           checkoutCart.isDisplayed() && pageTitle.getText().includes("Cart")
-        ); // loader пропал, а элемент появился
+        ); 
       },
       2000,
-      "Error: Shoping cart is not displayed"
+      "Error: Shoping cart block is not displayed"
     );
   }
-
+//Check cart items 
   checkItems(): any {
     const cartItems = $$(".item");
     const itemQuantity = 0;
@@ -32,9 +34,9 @@ export class ShoppingCartPO extends BasePO {
     if (res > itemQuantity) {
       return true;
     } else false;
-    console.log(res);
+    console.log("Items in cart:" + res);
   }
-
+//Remove item from the cart
   deleteItem(): any {
     const deleteBtn = $('button[name*="remove"]');
     const checkoutForm = $("div#box-checkout");
@@ -44,8 +46,30 @@ export class ShoppingCartPO extends BasePO {
         return checkoutForm.getText().includes("no items");
       },
       undefined,
-      "After deleting item stays visible"
+      "Error: After deleting, item stays visible"
     );
+  }
+
+//   increaseItemNumbers() {
+//   }
+
+//   decreaseItemNumbers(){
+
+//   }
+//Button update number
+  updateItemNumbers(): any {
+    const updateCartItemBtn = $('.item button[name="update_cart_item"]');
+    const cartItem = $('.item')
+   //const numberInput = $('.item input');
+    updateCartItemBtn.click();
+    browser.waitUntil(
+        function() {
+          return cartItem.isDisplayed();
+        },
+        undefined,
+        "Error: After updating item numbers is not updated"
+      );
+    
   }
 }
 

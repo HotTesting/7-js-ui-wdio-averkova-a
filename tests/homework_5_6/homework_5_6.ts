@@ -9,35 +9,60 @@
  */
 
 import { expect } from "chai";
-import { ProductDetails } from '../../pageObjects/productDetails';
+import { ProductDetails } from "../../pageObjects/productDetails";
 import { ShoppingCart } from '../../pageObjects/shoppingCart';
-import { RegionalSettings} from "../../pageObjects";
+import { RegionalSettings } from "../../pageObjects";
 
 describe("Cart", function() {
   it("adding one item to cart should be successful", function() {
     ProductDetails.open("/rubber-ducks-c-1/red-duck-p-3");
     ProductDetails.addToCart();
 
-    ShoppingCart.checkCart();
-    expect(browser.getUrl()).to.contain("checkout");  
+    ShoppingCart.openCart();
+    expect(ShoppingCart.checkItems).not.to.equal(0);
+    expect(browser.getUrl()).to.contain("checkout");
   });
 
   it("removing one item from cart should be successful", function() {
     ProductDetails.open("/rubber-ducks-c-1/red-duck-p-3");
     ProductDetails.addToCart();
-    
-    ShoppingCart.checkCart();
+
+    ShoppingCart.openCart();
     ShoppingCart.deleteItem();
   });
 
   // from 1 to 2 for example
-  it.skip("increasing item quantity in cart should be successful", function() {
-    throw new Error("NOT IMPLEMENTED");
+  it("increasing item quantity in cart should be successful", function() {
+    ProductDetails.open("/rubber-ducks-c-1/red-duck-p-3");
+    ProductDetails.addToCart();
+    ShoppingCart.openCart();
+    expect(ShoppingCart.checkItems).not.to.equal(0);
+
+    const itemNumbersInput = ".item input";
+    const value = $(itemNumbersInput).getValue();
+    expect(value).to.deep.equal(1);
+    $(itemNumbersInput).addValue(value + 1);
+    ShoppingCart.updateItemNumbers();
+
+    const value2 = $(itemNumbersInput).getValue();
+    expect(value2).to.deep.equal(2);
+    console.log(value, value2);
   });
 
   // from 2 to 1 for example
-  it.skip("decreasing item quantity in cart should be successful", function() {
-    throw new Error("NOT IMPLEMENTED");
+  it("decreasing item quantity in cart should be successful", function() {
+    ProductDetails.open("/rubber-ducks-c-1/red-duck-p-3");
+    ProductDetails.addToCart();
+    ProductDetails.addToCart();
+    ShoppingCart.openCart();
+    expect(ShoppingCart.checkItems).not.to.equal(0);
+    
+    const itemNumbersInput = ".item input";
+    $(itemNumbersInput).clearValue();
+    $(itemNumbersInput).addValue(1);
+    const value = $(itemNumbersInput).getValue();
+
+    expect(value).to.deep.equal(1);
   });
 
   afterEach(function() {
@@ -45,4 +70,3 @@ describe("Cart", function() {
     browser.refresh();
   });
 });
-

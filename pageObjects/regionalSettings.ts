@@ -33,11 +33,13 @@ export class RegionalSettingsPO extends BasePO {
 
   checkRegionalSettings(): any {
     const currencyLabel = $("#region div.currency")
+    currencyLabel.waitForDisplayed(3000);
     browser.waitUntil(
         function() {
-          return currencyLabel.isDisplayed() ;
-        }, 200, "Error msg: 'Regional Settings' popup is not displayed");
+          return currencyLabel.getText() ;
+        }, 2000, "Error msg: 'Currency' is not displayed");
   }
+
 }
 
 export const RegionalSettings = new RegionalSettingsPO();
