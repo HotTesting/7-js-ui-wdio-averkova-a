@@ -12,6 +12,7 @@ import { expect } from "chai";
 import { ProductDetails } from "../../pageObjects/productDetails";
 import { ShoppingCart } from '../../pageObjects/shoppingCart';
 import { RegionalSettings } from "../../pageObjects";
+import { RegionalSettingsDetails } from '../../pageObjects/fragments/regionalSettingsDetails';
 
 describe("Cart", function() {
   it("adding one item to cart should be successful", function() {
@@ -38,15 +39,15 @@ describe("Cart", function() {
     ShoppingCart.openCart();
     expect(ShoppingCart.checkItems).not.to.equal(0);
 
-    const itemNumbersInput = ".item input";
-    const value = $(itemNumbersInput).getValue();
-    expect(value).to.deep.equal(1);
-    $(itemNumbersInput).addValue(value + 1);
-    ShoppingCart.updateItemNumbers();
+    // const itemNumbersInput = ".item input";
+    // const value = $(itemNumbersInput).getValue();
+    // expect(value).to.deep.equal(1);
+    // $(itemNumbersInput).addValue(value + 1);
+    // ShoppingCart.updateItemNumbers();
 
-    const value2 = $(itemNumbersInput).getValue();
-    expect(value2).to.deep.equal(2);
-    console.log(value, value2);
+    // const value2 = $(itemNumbersInput).getValue();
+    // expect(value2).to.equal(2);
+    // console.log(value, value2);
   });
 
   // from 2 to 1 for example
@@ -57,16 +58,31 @@ describe("Cart", function() {
     ShoppingCart.openCart();
     expect(ShoppingCart.checkItems).not.to.equal(0);
     
-    const itemNumbersInput = ".item input";
-    $(itemNumbersInput).clearValue();
-    $(itemNumbersInput).addValue(1);
-    const value = $(itemNumbersInput).getValue();
+    // const itemNumbersInput = ".item input";
+    // $(itemNumbersInput).clearValue();
+    // $(itemNumbersInput).addValue(1);
+    // const value = $(itemNumbersInput).getValue();
 
-    expect(value).to.deep.equal(1);
+    // expect(value).to.equal(1);
   });
 
   afterEach(function() {
     browser.deleteCookies();
     browser.refresh();
+  });
+});
+
+// Set region and currency
+describe("Prices", function() {
+  it("can be switched to EUR", function() {
+    RegionalSettings.open();
+    RegionalSettings.openPopup();
+    RegionalSettings.regionalSettins.setCurrencyAndRegion({
+      currency: 'EUR',
+      country: 'UA'
+    });
+
+    RegionalSettings.saveSettings();
+    RegionalSettings.checkRegionalSettings();
   });
 });

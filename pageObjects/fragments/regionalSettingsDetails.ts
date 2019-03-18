@@ -28,7 +28,7 @@ export class RegionalSettingsDetails {
   }
 
   setCurrencyAndRegion(regionalSettings: IRegionalSettings): any {
-    $("#box-regional-settings").waitForDisplayed(undefined, true); // invisibility of loader
+    $(".loader-wrapper").waitForDisplayed(undefined, true); // invisibility of loader
     this.currency.selectByValueAttribute(regionalSettings.currency);
     this.country.selectByValueAttribute(regionalSettings.country);
 
@@ -43,5 +43,5 @@ export interface IRegionalSettings {
   currency: string;
   country: string;
   state?: string; 
-  tax: string
+  tax?: string
 }

@@ -7,7 +7,7 @@ export class RegionalSettingsPO extends BasePO {
   constructor() {
     super();
     this.regionalSettins = new RegionalSettingsDetails(
-      "#box-checkout-customer .billing-address"
+      "#box-regional-settings"
     );
   }
 
